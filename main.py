@@ -42,7 +42,7 @@ app = FastAPI(title="Bunnyshell Test API", lifespan=lifespan)
 @app.get("/")
 async def root():
     return {
-        "message": "Hello from Dokploy! This is an update",
+        "message": "Hello from Bunnyshell! This is an update",
         "status": "running",
         "timestamp": datetime.now().isoformat()
     }
