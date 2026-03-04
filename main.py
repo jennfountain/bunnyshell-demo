@@ -13,7 +13,8 @@ redis_client: Optional[redis.Redis] = None
 async def lifespan(app: FastAPI):
     # Startup: Initialize Redis connection
     global redis_client
-    redis_url = os.getenv("REDIS_URL", "redis://redis-thsbol.bunnyenv.com:6379")
+    redis_url = os.getenv(
+        "REDIS_URL", "redis://redis-thsbol.bunnyenv.com:6379")
     try:
         redis_client = await redis.from_url(
             redis_url,
@@ -35,7 +36,7 @@ async def lifespan(app: FastAPI):
         print("✓ Redis connection closed")
 
 
-app = FastAPI(title="Dokploy Test API", lifespan=lifespan)
+app = FastAPI(title="Bunnyshell Test API", lifespan=lifespan)
 
 
 @app.get("/")
@@ -209,6 +210,7 @@ async def get_counter(key: str):
     except HTTPException:
         raise
     except ValueError:
-        raise HTTPException(status_code=400, detail="Value is not a valid integer")
+        raise HTTPException(
+            status_code=400, detail="Value is not a valid integer")
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Redis error: {str(e)}")
