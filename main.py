@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Optional
 import redis.asyncio as redis
 from contextlib import asynccontextmanager
+import os
 
 # Redis client will be initialized on startup
 redis_client: Optional[redis.Redis] = None
@@ -12,9 +13,10 @@ redis_client: Optional[redis.Redis] = None
 async def lifespan(app: FastAPI):
     # Startup: Initialize Redis connection
     global redis_client
+    redis_url = os.getenv("REDIS_URL", "redis://redis.hotrod.svc.cluster.local:6379")
     try:
         redis_client = await redis.from_url(
-            "redis://redis.hotrod.svc.cluster.local:6379",
+            redis_url,
             encoding="utf-8",
             decode_responses=True,
             max_connections=10
