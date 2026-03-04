@@ -13,7 +13,7 @@ redis_client: Optional[redis.Redis] = None
 async def lifespan(app: FastAPI):
     # Startup: Initialize Redis connection
     global redis_client
-    redis_url = os.getenv("REDIS_URL", "redis://redis.hotrod.svc.cluster.local:6379")
+    redis_url = os.getenv("REDIS_URL", "redis://redis-blhcwj.bunnyenv.com:6379")
     try:
         redis_client = await redis.from_url(
             redis_url,
