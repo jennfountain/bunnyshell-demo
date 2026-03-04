@@ -10,6 +10,6 @@ COPY . .
 
 EXPOSE 8000
 
-ENV REDIS_URL="redis-vuyr56.bunnyenv.com"
+ENV REDIS_URL="redis://redis-thsbol.bunnyenv.com:6379"
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
