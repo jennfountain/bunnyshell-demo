@@ -3,11 +3,18 @@ FROM ubuntu:22.04
 # Prevent interactive prompts during package installation
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Install Python and development tools
+# Install software-properties-common to add PPAs
 RUN apt-get update && apt-get install -y \
+    software-properties-common \
+    && add-apt-repository ppa:deadsnakes/ppa -y \
+    && apt-get update
+
+# Install Python 3.12 and development tools
+RUN apt-get install -y \
     python3.12 \
+    python3.12-venv \
+    python3.12-dev \
     python3-pip \
-    python3-venv \
     git \
     curl \
     wget \
