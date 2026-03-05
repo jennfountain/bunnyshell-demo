@@ -14,7 +14,7 @@ RUN apt-get install -y \
     python3.12 \
     python3.12-venv \
     python3.12-dev \
-    python3-pip \
+    python3.12-distutils \
     git \
     curl \
     wget \
@@ -28,10 +28,13 @@ RUN apt-get install -y \
 RUN ln -sf /usr/bin/python3.12 /usr/bin/python && \
     ln -sf /usr/bin/python3.12 /usr/bin/python3
 
+# Install pip for Python 3.12
+RUN curl -sS https://bootstrap.pypa.io/get-pip.py | python3.12
+
 WORKDIR /app
 
 # Install Python development tools
-RUN pip install --no-cache-dir --break-system-packages \
+RUN python3.12 -m pip install --no-cache-dir \
     ipython \
     ipdb \
     pytest \
@@ -40,7 +43,7 @@ RUN pip install --no-cache-dir --break-system-packages \
 
 # Copy requirements and install
 COPY requirements.txt .
-RUN pip install --no-cache-dir --break-system-packages -r requirements.txt
+RUN python3.12 -m pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
