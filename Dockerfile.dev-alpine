@@ -1,0 +1,33 @@
+FROM python:3.12-alpine
+
+# Install development tools
+RUN apk add --no-cache \
+    bash \
+    git \
+    curl \
+    vim \
+    nano \
+    build-base \
+    linux-headers
+
+WORKDIR /app
+
+# Install Python development tools
+RUN pip install --no-cache-dir \
+    ipython \
+    ipdb \
+    pytest \
+    black \
+    ruff
+
+# Copy requirements and install
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+EXPOSE 8000
+
+# Default to bash shell for development
+CMD ["/bin/bash"]
