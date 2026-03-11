@@ -1,6 +1,5 @@
 services:
   app:
-    api:
     build: .
     image: ${OKTETO_BUILD_FRONTEND_IMAGE}
     ports:
