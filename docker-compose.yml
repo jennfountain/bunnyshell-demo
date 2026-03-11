@@ -8,3 +8,5 @@ services:
     labels:
       dev.okteto.com/service-type: NodePort
       alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+      alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-east-1:001218795811:certificate/6b3c8aae-12b7-4a44-8960-bcb3a3fcefe5
