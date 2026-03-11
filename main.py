@@ -14,7 +14,7 @@ async def lifespan(app: FastAPI):
     # Startup: Initialize Redis connection
     global redis_client
     redis_url = os.getenv(
-        "REDIS_URL", "redis://redis-thsbol.bunnyenv.com:6379")
+        "REDIS_URL", "redis://redis:6379")
     try:
         redis_client = await redis.from_url(
             redis_url,
@@ -42,7 +42,7 @@ app = FastAPI(title="Bunnyshell Test API", lifespan=lifespan)
 @app.get("/")
 async def root():
     return {
-        "message": "Hello from Bunnyshell! This is an update",
+        "message": "Hello from Okteto. This is a test. I also have redis!",
         "status": "running",
         "timestamp": datetime.now().isoformat()
     }

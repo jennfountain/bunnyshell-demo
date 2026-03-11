@@ -3,7 +3,7 @@
 # Redis API Test Script
 # This script tests all Redis endpoints in the FastAPI application
 
-BASE_URL="https://app-thsbol.bunnyenv.com"
+BASE_URL="https://app-jennf-test.pse.infrastructure-testing.aweber.cloud"
 echo "Testing FastAPI Redis Integration"
 echo "=================================="
 echo ""
