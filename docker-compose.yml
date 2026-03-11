@@ -1,38 +1,8 @@
 services:
-  redis:
-    image: redis:7-alpine
-    container_name: fastapi-redis
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 5
-    networks:
-      - app-network
-
   app:
+    api:
     build: .
-    container_name: fastapi-app
+    image: ${OKTETO_BUILD_FRONTEND_IMAGE}
     ports:
-      - "8000:8000"
-    environment:
-      - REDIS_URL=redis://redis-thsbol.bunnyenv.com:6379
-    depends_on:
-      redis:
-        condition: service_healthy
-    networks:
-      - app-network
-    volumes:
-      - .:/app
+      - 8000:8000
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
-
-volumes:
-  redis-data:
-
-networks:
-  app-network:
-    driver: bridge

@@ -2,3 +2,7 @@ build:
   frontend:
     context: .
     dockerfile: Dockerfile
+
+deploy:
+  remote: true
+  compose: docker-compose.yml
