@@ -6,7 +6,3 @@ build:
 deploy:
   remote: true
   compose: docker-compose.yml
-
-ingress:
-  annotations:
-    kubernetes.io/ingress.class: nginx  
